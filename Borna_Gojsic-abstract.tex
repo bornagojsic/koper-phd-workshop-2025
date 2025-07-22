@@ -1,0 +1,68 @@
+\documentclass[a4paper,14pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german,english,russian]{babel}
+\usepackage{amssymb,amsmath,amsfonts,amsthm}
+\usepackage{cmap}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage[dvips,usenames]{color}
+\usepackage{xcolor}
+\usepackage[dvips]{graphicx}
+\usepackage{tikz}
+\usepackage{setspace}
+\usepackage{enumerate}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{chngpage}
+\usepackage[mathscr]{eucal}
+\usepackage{bbm}
+\usepackage{mathbbol}
+\usepackage{ifthen}
+\bibliographystyle{article}
+
+\usepackage[top=2cm,bottom=1cm,bindingoffset=0cm]{geometry}
+\textheight=240mm
+\textwidth=160mm
+\oddsidemargin=0.1in
+\evensidemargin=0.1in
+
+%--------------------------------------------------------------------------------------------
+\begin{document}
+\sloppy
+\renewcommand{\refname}{\small{References}}
+\thispagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{\footnotesize{PhD Summer School in Discrete Mathematics}}
+\fancyhead[R]{\footnotesize{Abstract}}
+\fancyfoot{}
+\renewcommand{\footrulewidth}{0.1 mm}
+
+\begin{center}
+  \textbf{$\alpha$-labeling of banana tree graphs}\\
+  \vspace{\baselineskip}
+  Borna Gojšić\\
+  \emph{Faculty of Electrical Engineering and Computing, Zagreb, Croatia}\\
+  borna.gojsic@fer.hr\\
+  \vspace{\baselineskip}
+  This is joint work with Anamari Nakić\\
+\end{center}
+\vspace{\baselineskip}
+
+A banana tree graph, denoted by $B(n, k)$, is a tree constructed by connecting $n$ star graphs $S_k$ to a root vertex.
+TODO: Add graceful labeling definition.
+An $\alpha$ labeling is a type of graceful labeling introduced by Rosa~\cite{1} which satisfies the $\alpha$-inequality; there must exist a constant $\alpha$ such that for every edge $uv$, either one of the following holds:
+\begin{itemize}
+  \item $f(u) \le \alpha < f(v)$, or
+  \item $f(v) \le \alpha < f(u)$.
+\end{itemize}
+This article builds upon previous research on graceful labelings of banana trees and explores their $\alpha$-labelability. We utilize the symmetries of the $B(n,k)$ trees to give the number of all of the non-isomorphic $\alpha$-labelings based on specific subsets of them which we call {\it proper} and {\it central} $\alpha$-labelings. We classify all the $\alpha$-labelings for all the $B(n, 1)$, $B(1, k)$ and $B(2,k)$ trees. We present $\alpha$-labelings of the $B(n,k)$ tree, for $k \geq \frac{n}{2} + 1$ and $n \in \mathbb{N}$. Finally, we prove that the $B(n, k)$ tree is not $\alpha$-labelable for $1 < k \leq \frac{n}{2}$ and any $n \ge 3$, classifying all the $B(n, k)$ trees based on their $\alpha$-labelability.
+
+\begin{thebibliography}{99}
+  \bibitem{1} \small{A.~Rosa, On certain valuations of the vertices of a graph, in: Theory of graphs (Internat. Sympos., Rome, 1966), Gordon \& Breach, New York, 1967, 349--355.}
+\end{thebibliography}
+
+\end{document}
