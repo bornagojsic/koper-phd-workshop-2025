@@ -52,9 +52,7 @@
 \end{center}
 \vspace{\baselineskip}
 
-A banana tree graph, denoted by $B(n, k)$, is a tree constructed by connecting $n$ star graphs $S_k$ to a root vertex.
-TODO: Add graceful labeling definition.
-An $\alpha$ labeling is a type of graceful labeling introduced by Rosa~\cite{1} which satisfies the $\alpha$-inequality; there must exist a constant $\alpha$ such that for every edge $uv$, either one of the following holds:
+A banana tree graph, denoted by $B(n, k)$, is a tree constructed by connecting $n$ star graphs $S_k$ to a root vertex. A labeling of the vertices $f : V \to \{0,1,2,\dots,|E|\}$ of a graph $G = (V, E)$ is said to be a graceful ($\beta$) labeling if the resulting induced edge labeling $f^*: E \to \mathbb{N}$ defined by $f^*(uv) = |f(u)- f(v)|$ is bijection onto the set $\{1,2,\dots,|E|\}$. An $\alpha$-labeling is a type of graceful labeling introduced by Rosa~\cite{1} which satisfies the $\alpha$-inequality; there must exist a constant $\alpha \in \mathbb{N}$ such that for every edge $uv$, either one of the following holds:
 \begin{itemize}
   \item $f(u) \le \alpha < f(v)$, or
   \item $f(v) \le \alpha < f(u)$.
