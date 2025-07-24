@@ -28,12 +28,11 @@
 \section{Introduction}
 
 \begin{frame}{Motivation}
-  % TODO
   \begin{itemize}
-    \item Fokus rada: \textbf{$\alpha$-označavanje} i posebna familija stabala -- banana stabla.
-    \item Rosa (1967) uveo graciozno ($\beta$) označavanje i $\alpha$-označavanje.
-    \item Ringel-Kotzigova hipoteza: Sva stabla su graciozna.
-    \item Primjene označavanja stabala: teorija kodiranja, teorija mreža.
+    \item Focus: \textbf{$\alpha$-labeling} and a special family of trees -- banana trees
+    \item Rosa (1967) introduced graceful ($\beta$) labeling and $\alpha$-labeling
+    \item Ringel-Kotzig conjecture: All trees are graceful
+    \item Applications of $\alpha$-labelings: coding theory, graph decompositions
   \end{itemize}
 \end{frame}
 
@@ -136,7 +135,7 @@
         \item $f(v) \le \alpha < f(u)$
       \end{enumerate}
   \end{itemize}
-  TODO: Mozda dodati kompleksnije stablo
+  %TODO: Mozda dodati kompleksnije stablo
   \begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=0.6, every node/.style={circle, draw, fill=black, inner sep=1.5pt}]
@@ -172,7 +171,21 @@
 \end{frame}
 
 \begin{frame}{Conjugate and reverse $\alpha$-labelings}
-  TODO: dodati Rosin remark o $\alpha$-označavanjima
+  \begin{block}{Remark}
+    \begin{enumerate}
+      \item If $f$ is an $\alpha$-labeling of $G$ and $f^*(vw) = 1$ for some $v, w \in V$, then $\alpha = \min\{f(v), f(w)\}$.
+      \item If $f$ is an $\alpha$-labeling of a graph $G$ with $n$ vertices, then its complementary labeling $\overline{f}$ defined as $\overline{f}(v) = n + 1 - f(v)$ is also an $\alpha$-labeling of $G$ with $\overline{\alpha} = n - \alpha + 1$.
+      \item If $f$ is an $\alpha$-labeling of $G$, its reverse (or inverse) labeling $f^r$ defined as
+        $$
+        f^r(v) =
+        \begin{cases}
+          \alpha + 1 - f(v), & f(v) \leq \alpha \\
+          n + \alpha + 1 - f(v), & f(v) > \alpha
+        \end{cases}
+        $$
+        is also an $\alpha$-labeling of $G$ with $\alpha^r = \alpha$.
+    \end{enumerate}
+  \end{block}
 \end{frame}
 
 \section{Banana trees}
@@ -482,8 +495,75 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{Symmetries of banana trees}
-  TODO: dodati simetrije banana stabla
+\begin{frame}{RSF and isomorphic labelings}
+  \begin{itemize}
+    \item $\mathcal{L}_i = \{l_{i,j} \mid j \in [k-2] \}$ and $\mathcal{B}_i$ = $\{a_i\} \cup \mathcal{L}_i$
+    \item swapping the labels of two leaves or two stars doesn't change the labeling
+  \end{itemize}
+  \begin{figure}[H]
+    \centering
+    \begin{adjustbox}{center}
+      \begin{tikzpicture}[scale=0.8, every node/.style={circle, draw, fill=black, inner sep=1pt}]
+
+        \node[label=below:{$r$}] (central) at (0, -2) {};
+
+        \def\k{5} % Number of leaves in each star graph
+        \def\leafradius{1.2} % Radius of the circular arrangement of leaves
+
+        \node[label=above:{$c_1$}] (b1) at (-2.5, 0) {};
+        \node[label=above:{$c_n$}] (b2) at (2.5, 0) {};
+
+        \foreach \j in {1,...,\k} {
+          \pgfmathsetmacro\leafangle{-90 - 360/\k * (\j-1)}
+
+          \coordinate (l1\j) at ($(b1) + (\leafangle:\leafradius)$);
+          \coordinate (l2\j) at ($(b2) + (\leafangle:\leafradius)$);
+        }
+
+        \node[label=left:{$a_1$}] at (l11) {};
+        \node[label=left:{$l_{1,1}$}] at (l12) {};
+        \node[label=left:{$l_{1,2}$}] at (l13) {};
+        \node[label=right:{$l_{1,k-3}$}] at (l14) {};
+        \node[label=right:{$l_{1,k-2}$}] at (l15) {};
+
+        \draw (b1) -- (l11);
+        \draw (b1) -- (l12);
+        \draw (b1) -- (l13);
+        \draw (b1) -- (l14);
+        \draw (b1) -- (l15);
+
+        \node[label=right:{$a_n$}] at (l21) {};
+        \node[label=left:{$l_{n,1}$}] at (l22) {};
+        \node[label=left:{$l_{n,2}$}] at (l23) {};
+        \node[label=right:{$l_{n,k-3}$}] at (l24) {};
+        \node[label=right:{$l_{n,k-2}$}] at (l25) {};
+
+        \draw (b2) -- (l21);
+        \draw (b2) -- (l22);
+        \draw (b2) -- (l23);
+        \draw (b2) -- (l24);
+        \draw (b2) -- (l25);
+
+        \foreach \j in {1,...,2} {
+          \pgfmathsetmacro\dotangle{90}
+          \node[draw=none, fill=none] at ($(b\j) + (\dotangle:0.95*\leafradius)$) {\textbf{$\cdots$}};
+        }
+
+        \node[draw=none, fill=none] at ($(b1) + (180:2.1*\leafradius)$) {\Large \textbf{$S^1_k$}};
+        \node[draw=none, fill=none] at ($(b2) + (0:2.1*\leafradius)$) {\Large \textbf{$S^n_k$}};
+
+        \draw (central) -- (l11);
+        \draw (central) -- (l21);
+
+        % Optional: add dots to indicate missing parts in the middle
+        \node[draw=none,fill=none] at (0,0) {\huge \textbf{$\cdots$}};
+
+      \end{tikzpicture}
+    \end{adjustbox}
+
+    \caption{Rooted standard form of a $B(n, k)$ tree}
+    \label{fig:rsf-banana-tree}
+  \end{figure}
 \end{frame}
 
 \section{Our results}
@@ -514,7 +594,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Classifying all the \(\alpha\)-labelings of \( B(n, 1) \) and \( B(1, k) \) trees}
+\begin{frame}{Classifying all the \(\alpha\)-labelings of all the \( B(n, 1) \) trees}
   \begin{figure}[H]
     \centering
     \begin{minipage}{0.4\textwidth}
@@ -601,7 +681,7 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{Classifying all the \(\alpha\)-labelings of \( B(n, 1) \) and \( B(1, k) \) trees}
+\begin{frame}{Classifying all the \(\alpha\)-labelings of all the \( B(1, k) \) trees}
   \begin{figure}[H]
     \centering
     \begin{minipage}{0.4\textwidth}
@@ -719,13 +799,13 @@
         \node[circle, draw, fill=black, inner sep=2pt, label=right:{$k-3$}] at (V6) {};
         \node[circle, draw, fill=black, inner sep=2pt, label=above right:{$k-4$}] at (V7) {};
 
-        \draw (c) -- (V1) node[tight, midway, above, sloped, text=red, fill=none, draw=none] {$k-2$};
-        \draw (c) -- (V2) node[tight, midway, above, text=red, fill=none, draw=none] {$k-1$};
+        \draw (c) -- (V1);
+        \draw (c) -- (V2) node[tight, midway, above left, text=red, fill=none, draw=none] {$k-1$};
         \draw (c) -- (V3) node[midway, left, text=red, fill=none, draw=none] {$k$};
-        \draw (c) -- (V4) node[tight, midway, right, text=red, fill=none, draw=none] {2};
-        \draw (c) -- (V5) node[midway, right, text=red, fill=none, draw=none] {3};
-        \draw (c) -- (V6) node[midway, above, text=red, fill=none, draw=none] {4};
-        \draw (c) -- (V7) node[midway, above, sloped, text=red, fill=none, draw=none] {5};
+        \draw (c) -- (V4) node[tight, midway, left, text=red, fill=none, draw=none] {2};
+        \draw (c) -- (V5) node[midway, below left, text=red, fill=none, draw=none] {3};
+        \draw (c) -- (V6) node[midway, below right, text=red, fill=none, draw=none] {4};
+        \draw (c) -- (V7) node[midway, below right, text=red, fill=none, draw=none] {5};
 
         \draw (V4) -- (r) node[tight, midway, right, text=red, fill=none, draw=none] {1};
 
@@ -762,10 +842,10 @@
         \node[circle, draw, fill=black, inner sep=2pt, label=right:{$k-2$}] at (V6) {};
         \node[circle, draw, fill=black, inner sep=2pt, label=above right:{$k-3$}] at (V7) {};
 
-        \draw (c) -- (V1) node[tight, midway, above, sloped, text=red, fill=none, draw=none] {$k-4$};
-        \draw (c) -- (V2) node[tight, midway, above, text=red, fill=none, draw=none,] {$k-3$};
+        \draw (c) -- (V1);
+        \draw (c) -- (V2) node[tight, midway, above left, text=red, fill=none, draw=none,] {$k-3$};
         \draw (c) -- (V3) node[midway, left, text=red, fill=none, draw=none] {$k-2$};
-        \draw (c) -- (V4) node[tight, midway, right, text=red, fill=none, draw=none] {$k-1$};
+        \draw (c) -- (V4) node[tight, midway, text=red, fill=none, draw=none] {$k-1$};
         \draw (c) -- (V5) node[midway, above, text=red, fill=none, draw=none] {1};
         \draw (c) -- (V6) node[midway, above, text=red, fill=none, draw=none] {2};
         \draw (c) -- (V7) node[midway, above, sloped, text=red, fill=none, draw=none] {3};
@@ -778,6 +858,124 @@
       \caption*{$\alpha$-labeling $f_4$ with $\alpha_4 = k - 1$} \label{fig:B(1,k)d}
     \end{minipage}
     \caption{Four possible $\alpha$-labelings of $B(1, k)$} \label{fig:B(1,k)}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Classifying all the \(\alpha\)-labelings of all the \( B(2, k) \) trees}
+  \begin{figure}[H]
+    \centering
+    \begin{minipage}{0.47\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.75, every node/.style={circle, draw, fill=black, inner sep=1pt}]
+
+        \node[label=below:{$1$}] (central) at (0, -2) {};
+
+        \def\k{5} % Number of leaves in each star graph
+        \def\leafradius{1.2} % Radius of the circular arrangement of leaves
+
+        \node[label=above:{$2$}] (b1) at (-1.5, 0) {};
+        \node[label=above:{$3$}] (b2) at (1.5, 0) {};
+
+        \foreach \j in {1,...,\k} {
+          \pgfmathsetmacro\leafangle{-90 - 360/\k * (\j-1)}
+
+          \coordinate (l1\j) at ($(b1) + (\leafangle:\leafradius)$);
+          \coordinate (l2\j) at ($(b2) + (\leafangle:\leafradius)$);
+        }
+
+        \node[label=left:{$2k + 1$}] at (l11) {};
+        \node[label=left:{$k + 3$}] at (l12) {};
+        \node[label=left:{$k + 4$}] at (l13) {};
+        \node[label=above right:{$2k - 1$}] at (l14) {};
+        \node at (l15) {};
+        \node[draw=none, fill=none] at ([yshift=5mm]l15) {$2k$};
+
+        \draw (b1) -- (l11);
+        \draw (b1) -- (l12);
+        \draw (b1) -- (l13);
+        \draw (b1) -- (l14);
+        \draw (b1) -- (l15);
+
+        \node[label=right:{$k + 1$}] at (l21) {};
+        \node[label=below right:{$4$}] at (l22) {};
+        \node[label=left:{$5$}] at (l23) {};
+        \node[label=right:{$k$}] at (l24) {};
+        \node[label=right:{$k + 2$}] at (l25) {};
+
+        \draw (b2) -- (l21);
+        \draw (b2) -- (l22);
+        \draw (b2) -- (l23);
+        \draw (b2) -- (l24);
+        \draw (b2) -- (l25);
+
+        \foreach \j in {1,...,2} {
+          \pgfmathsetmacro\dotangle{90}
+          \node[draw=none, fill=none] at ($(b\j) + (\dotangle:0.95*\leafradius)$) {\textbf{$\cdots$}};
+        }
+
+        \draw (central) -- (l11);
+        \draw (central) -- (l21);
+      \end{tikzpicture}
+      \caption*{$\alpha$-labeling $f \in \mathcal{A}_1(2, k)$} \label{fig:B(2,k)a}
+    \end{minipage}
+    \hspace{2mm}
+    \begin{minipage}{0.475\textwidth}
+      \centering
+      \begin{tikzpicture}[scale=0.75, every node/.style={circle, draw, fill=black, inner sep=1pt}]
+
+        \node[label=below:{$2$}] (central) at (0, -2) {};
+
+        \def\k{5} % Number of leaves in each star graph
+        \def\leafradius{1.2} % Radius of the circular arrangement of leaves
+
+        \node[label=above:{$1$}] (b1) at (-1.5, 0) {};
+        \node[label=above:{$3$}] (b2) at (1.5, 0) {};
+
+        \foreach \j in {1,...,\k} {
+          \pgfmathsetmacro\leafangle{-90 - 360/\k * (\j-1)}
+
+          \coordinate (l1\j) at ($(b1) + (\leafangle:\leafradius)$);
+          \coordinate (l2\j) at ($(b2) + (\leafangle:\leafradius)$);
+        }
+
+        \node[label=left:{$y$}] at (l11) {};
+        \node[label=left:{$y + 1$}] at (l12) {};
+        \node[label=left:{$y + 2$}] at (l13) {};
+        \node[label=above right:{$y - 4$}] at (l14) {};
+        \node at (l15) {};
+        \node[draw=none, fill=none] at ([yshift=5mm]l15) {$y - 2$};
+
+        \draw (b1) -- (l11);
+        \draw (b1) -- (l12);
+        \draw (b1) -- (l13);
+        \draw (b1) -- (l14);
+        \draw (b1) -- (l15);
+
+        \node[label=right:{$2k + 5 - y$}] at (l21) {};
+        \node[label=below right:{$4$}] at (l22) {};
+        \node[label=left:{$5$}] at (l23) {};
+        \node at (l24) {};
+        \node at (l25) {};
+        \node[draw=none, fill=none] at ([yshift=5mm]l24) {$2k + 9 - y$};
+        \node[draw=none, fill=none] at ([yshift=5mm, xshift=3mm]l25) {$2k + 7 - y$};
+
+        \draw (b2) -- (l21);
+        \draw (b2) -- (l22);
+        \draw (b2) -- (l23);
+        \draw (b2) -- (l24);
+        \draw (b2) -- (l25);
+
+        \foreach \j in {1,...,2} {
+          \pgfmathsetmacro\dotangle{90}
+          \node[draw=none, fill=none] at ($(b\j) + (\dotangle:0.95*\leafradius)$) {\textbf{$\cdots$}};
+        }
+
+        \draw (central) -- (l11);
+        \draw (central) -- (l21);
+      \end{tikzpicture}
+      \caption*{$\alpha$-labeling $f_y \in \mathcal{A}_2(2, k)$} \label{fig:B(2,k)b}
+    \end{minipage}
+    \caption{Two types of principal $\alpha$-labelings of $B(2, k)$ (with $k + 3 \le y \le 2k + 1$)} \label{fig:B(2, k)}
   \end{figure}
 \end{frame}
 
@@ -862,7 +1060,7 @@
 \end{frame}
 
 \begin{frame}{A sketch of the proof for \( B(n, k) \) for \( \frac{n}{2} + 1 \le k \le n\)}
-  \begin{align}\label{eq:Tm5}
+  \begin{align*}\label{eq:Tm5}
     \begin{split}
       f(r) &= n + 2 - k \\
       f(c_i) &=
@@ -877,7 +1075,7 @@
       \end{cases} \\
       \mathcal{F}(\mathcal{L}_i) &= \{n + 3 -k + (k - 1) i, \dots, n + 1 + (k - 1) i\} \setminus \{f(a_i)\}
     \end{split}
-  \end{align}
+  \end{align*}
 \end{frame}
 
 \begin{frame}{A sketch of the proof for \( B(n, k) \) for \( \frac{n}{2} + 1 \le k \le n\)}
